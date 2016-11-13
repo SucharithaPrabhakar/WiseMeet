@@ -1,0 +1,13 @@
+<li id="group-<%= group.id %>">
+  <%= link_to gravatar_for(current_user, size: 50), current_user %>
+  <span class="user"><%= link_to group.name, group_path(group) %></span>
+  <span class="content">
+    <%= group.content %>
+    <%= image_tag group.picture.url if group.picture? %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(group.created_at) %> ago.
+     <% if group.users.include? current_user %>
+    <% end %>
+  </span>
+</li>

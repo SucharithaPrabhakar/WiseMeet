@@ -1,0 +1,112 @@
+<head>
+<script type="text/javascript">
+  function callbackhandler()
+  {
+    return show_members(<%= raw(@memberships.to_json) %>);
+  }
+  function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBDUoe2_d_LIRiOcRbiKe780eAp40ob_uM' +
+      '&signed_in=true&callback=callbackhandler&libraries=places';
+  document.body.appendChild(script);
+  }
+  window.onload = loadScript();
+</script>
+</head>
+
+<% provide(:title, 'Find A Place To Meet') %>
+<h1>Find A Place To Meet</h1>
+<!-- Display the latitude and longitude of members on the map -->
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div id="map"></div>
+<%= button_tag "Find Central Location", class: "btn btn-primary", id:'find_central_location' %>
+
+
+        <form name="controls">
+      
+          <div>
+           <table class="table table-striped" style="margin-top:10px;width:555px;height:350px" border='2'>
+            <tr>
+            <td><label class=""> <input type="checkbox"name="type" value="art_gallery" 
+            	onclick="updateRankByCheckbox()" />Art Gallery</label></td>
+            <td><label class=""> <input type="checkbox" name="type" value="bowling_alley"
+                   onclick="updateRankByCheckbox()" />Bowling Alley</label></td>
+            <td><label class=""> <input type="checkbox" name="type" value="cafe"
+                   onclick="updateRankByCheckbox()" />Cafe</label></td>
+            </tr>
+            <tr>
+            <td><label class=""> <input type="checkbox" name="type" value="food"
+                   onclick="updateRankByCheckbox()" />Food</label></td>
+            <td><label class=""> <input type="checkbox" name="type" value="lodging"
+                   onclick="updateRankByCheckbox()" />Lodging</label></td>
+			<td><label class=""> <input type="checkbox" name="type" value="jewelry_store"
+                   onclick="updateRankByCheckbox()" />Jewelry Store</label></td>
+             </tr>
+             <tr>
+             <td><label class=""> <input type="checkbox" name="type" value="liquor_store"
+                   onclick="updateRankByCheckbox()" />Liquor Store</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="meal_takeaway"
+                   onclick="updateRankByCheckbox()" />Meal Takeaway</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="movie_rental"
+                   onclick="updateRankByCheckbox()" />Movie Rental</label></td>
+             </tr>
+             <tr>
+             <td><label class=""> <input type="checkbox" name="type" value="night_club"
+                   onclick="updateRankByCheckbox()" />Night Club</label></td>
+             <td><label class=""><input type="checkbox" name="type" value="park"
+                   onclick="updateRankByCheckbox()" />Park</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="restaurant"
+                   onclick="updateRankByCheckbox()" />Restuarant</label></td>
+             </tr>
+             <tr>
+             <td><label class=""> <input type="checkbox" name="type" value="rv_park"
+                   onclick="updateRankByCheckbox()" />RV Park</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="shopping_mall"
+                   onclick="updateRankByCheckbox()" />Shopping Mall</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="spa"
+                   onclick="updateRankByCheckbox()" />Spa</label></td>
+             </tr>
+             <tr>
+             <td><label class=""> <input type="checkbox" name="type" value="stadium"
+                   onclick="updateRankByCheckbox()" />Stadium</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="zoo"
+                   onclick="updateRankByCheckbox()" />Zoo</label></td>
+             <td><label class=""> <input type="checkbox" name="type" value="store"
+                   onclick="updateRankByCheckbox()" />Store</label></td>
+              </tr>
+          </table>
+
+          </div>
+          <div id="rankbylabel" style="margin-top: 5px; color: #cccccc">
+            <label class=""><input type="checkbox"
+                   name="rankbydistance" /> Rank by distance</input></label><br>
+          </div>
+          <div style="margin-top: 5px">
+            <input type="submit" value="Search" class = "btn btn-primary" onclick="search(event)" />
+          </div>
+        </form>
+ </div>
+
+<div id="listing" class="col-md-3 .col-md-offset-3">
+    <table id="results"></table>
+ </div>           
+ </div>
+
+<script type="text/javascript">
+  $('#find_central_location').bind('click', function() {
+    calculateCentralLocation(<%= raw(@memberships.to_json) %>);    // form map for new view (print nothing with possibility of put marker)
+  });
+</script>
+
+ <div id="listing" class="col-md-3 .col-md-offset-3">
+    <table id="results"></table>
+ </div>           
+ </div>
+
+<script type="text/javascript">
+  $('#find_central_location').bind('click', function() {
+    calculateCentralLocation(<%= raw(@memberships.to_json) %>);    // form map for new view (print nothing with possibility of put marker)
+  });
+</script>

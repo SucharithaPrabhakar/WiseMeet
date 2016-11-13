@@ -1,0 +1,52 @@
+<% provide(:title, 'Create A Group') %>
+<h1>Create A Group</h1>
+<head>
+<script type="text/javascript">
+  function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp?key=AIzaSyBslslsjt39lrmv1mW0DhRkQF4eHQ-cL0I' +
+      '&signed_in=true&callback=specifylocation';
+  document.body.appendChild(script);
+  }
+  window.onload = loadScript();
+</script>
+</head>
+
+<body>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+  
+  <%= form_tag(creategroup_path, :method=>'post', :multipart => true) do |f| %>
+   <%= label_tag 'Group Name' %>
+   <%= text_field_tag :name, nil, class: "form-control" %>
+   <%= label_tag 'Date' %>
+   <div class="field">
+     <%= date_field_tag :content %>
+   </div>
+   <%= label_tag 'Add a Group Picture?' %>
+   <span class="picture">
+     <%= file_field_tag :picture, accept: "image/jpeg,image/gif,image/png" %>
+   </span>
+     <%= hidden_field_tag('admin', true, id: 'admin') %>
+   <%= label_tag 'Set your starting location' %>
+   <div>
+     <div id="map"></div>
+   </div>
+   <%= hidden_field_tag('map_lat', nil, id: 'map_lat') %>
+   <%= hidden_field_tag('map_lng', nil, id: 'map_lng') %>
+   <%= submit_tag "Create a Group", class: "btn btn-primary" %>
+  <% end %>
+  
+  </div>
+</div>
+</body>
+
+<script type="text/javascript">
+  $('#group_picture').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>

@@ -1,0 +1,25 @@
+<% provide(:title, @group.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <%= image_tag @group.picture.url if @group.picture? %>
+      <h1>
+        <%= @group.name %>
+      </h1>
+        <%= link_to "Add Member", addmember_path(@group), method: "post" %>
+         <% if @group.memberships.detect{ |e| e.admin == true}.user_id == current_user.id %>
+           | <%= link_to "Delete Group", @group, method: :delete,
+                                         data: { confirm: "You sure?" } %>
+         <% end %>
+          | <%= link_to "Find Place To Meet", findplacetomeet_path(@group), method: "get" %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @group.memberships.any? %>
+      <h3>Group Members (<%= @group.memberships.count %>) </h3>
+      <ol class="users">
+        <%= render 'group_users', object: @group.users %>
+      </ol>
+    <% end %>
+  </div>
+</div>

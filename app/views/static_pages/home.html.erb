@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <%= render 'shared/groups_to_which_user_belongs' %>
+    </div>
+  </div>
+<% else %>
+<div class="center jumbotron">
+  <h1>(: Wise Meet :)</h1>
+
+  <h2>
+    Why crib about travelling all around the city to meet your friends.?
+  </h2>
+  <h4>
+    We provide answers to your travel woes.
+    We make it easier and inexpensive for you to meet your friends.
+    So, you don't have to search for reasons to avoid meeting them.
+  </h4>
+  <br/>
+
+  <h2>
+    What do we do?
+  </h2>
+  <h4>
+   We will suggest those places which are convenient to your group of friends.
+   We will help you in deciding places where you can hang out with your friends.
+   We will suggest places that are centrally located and you can pick and choose from this list :)
+  </h4>
+
+
+  <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+</div>
+
+<% end %>

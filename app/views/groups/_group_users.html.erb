@@ -1,0 +1,23 @@
+<% @group.users.each do |user| %>
+   <li>
+    <div class="row">
+    <div class="col-xs-12 col-md-8">
+    <%= gravatar_for user, size: 50 %>
+    <%= link_to user.name, user %>
+    <% if user == current_user %>
+     |  <%= link_to "Add/Change Location", addlocation_path(@group.id), method: :patch %>
+    </div>
+    <div class="col-xs-12 col-md-10">
+    <% else %>
+      <% if current_user.memberships.find_by(group_id: @group.id).admin? %>
+        <%= form_tag(removememberfromgroup_path, :method=>'post') do |f| %>
+        <%= hidden_field_tag('user_id', user.id, id: 'user_id') %>
+        <%= hidden_field_tag('group_id', @group.id, id: 'group_id') %>
+        <%= submit_tag "Remove User From Group", class:"btn btn-danger" %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+  </div> 
+ </li>
+<% end %>

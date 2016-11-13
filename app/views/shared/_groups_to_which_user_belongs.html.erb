@@ -1,0 +1,7 @@
+<% if @groups_to_which_user_belongs.any? %>
+ <h3> Groups </h3>
+  <ol class="groups">
+    <%= render @groups_to_which_user_belongs %>
+  </ol>
+  <%= will_paginate @groups_to_which_user_belongs  %>
+<% end %>

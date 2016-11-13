@@ -1,0 +1,36 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+         Hello <%= @user.name %>
+      </h1>
+    </section>
+    </aside>
+    <aside class="col-md-6">
+     <section class="budget-info">
+           <%= form_tag(user_path(@user), method: "patch") %>
+           <%= label_tag 'New Budget' %>
+           <%= number_field_tag :new_budget, 0,  class: 'form-control' %>
+           <%= label_tag 'Budget Change Reason' %>
+           <%= text_field_tag :budget_change_reason, nil,  class: 'form-control' %>
+           <%= submit_tag "Update Budget", class: "btn btn-primary" %>
+     </section> 
+  </aside>
+</div>
+
+<div class="col-md-12">
+ <div class="user_info">
+           <table class="table table-striped">
+            <tr>
+              <td><b> Available Budget </b> </td>
+              <td><b> Budget Change Reason </b> </td>
+            </tr>
+            <tr>
+              <td><%= @user.new_budget %> </td>
+              <td><%= @user.budget_change_reason %> </td>
+            </tr>
+            </table>
+</div>
+</div>
